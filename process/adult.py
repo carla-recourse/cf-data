@@ -10,7 +10,7 @@ def main():
     df = handle_null_values(df)
     df = binary_map_categories(df)
 
-    df.to_csv("adult.csv")
+    df.to_csv("adult.csv", index=False)
 
 
 def handle_null_values(df):
