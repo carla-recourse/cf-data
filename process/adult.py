@@ -6,19 +6,13 @@ def main():
     df = pd.read_csv("raw/adult.csv")
 
     df = df.drop(columns=["education"], axis="columns")
+    df = df.replace("?", None).dropna()
 
-    df = handle_null_values(df)
+    df["income"] = df["income"].apply(lambda x: 1 if ">50K" in x else 0)
+
     df = binary_map_categories(df)
 
     df.to_csv("adult.csv", index=False)
-
-
-def handle_null_values(df):
-
-    df = df.replace("?", None)
-    df = df.dropna()
-
-    return df
 
 
 def binary_map_categories(df):
