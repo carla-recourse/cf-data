@@ -94,6 +94,8 @@ def get_and_preprocess_compas_data(params):
     }
     X["race"] = X["race"].map(race_map)
 
+    X = X.dropna()
+
     return X
 
 
