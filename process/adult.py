@@ -79,6 +79,8 @@ def binary_map_categories(df):
     df.loc[df["native-country"] != "United-States", "native-country"] = "Non-US"
     df.loc[df["native-country"] == "United-States", "native-country"] = "US"
 
+    df = df.dropna()
+
     return df
 
 
