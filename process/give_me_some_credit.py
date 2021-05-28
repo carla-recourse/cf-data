@@ -4,9 +4,9 @@ from scipy import stats
 
 
 def main():
-    path = "raw/give_me_credit/"
+    path = "raw/"
     # Using only train file, because test file does not contain label information.
-    trainFile = "cs-training.csv"
+    trainFile = "givemecredit.csv"
 
     # Read Data from csv
     train_df = pd.read_csv(path + trainFile, index_col=False)
