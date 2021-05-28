@@ -1,55 +1,18 @@
-import json
-
 import numpy as np
 import pandas as pd
 
 
-class Params:
-    """Parameters object taken from: https://github.com/cs230-stanford/cs230-code-examples/blob/master/pytorch/nlp/utils.py
-
-    Parameters
-    ----------
-    json_path : string
-
-    Returns
-    ----------
-    Parameters object
-    """
-
-    def __init__(self, json_path):
-        with open(json_path) as f:
-            params = json.load(f)
-            self.__dict__.update(params)
-
-    def save(self, json_path):
-        with open(json_path, "w") as f:
-            json.dump(self.__dict__, f, indent=4)
-
-    def update(self, json_path):
-        """Loads parameters from json file"""
-        with open(json_path) as f:
-            params = json.load(f)
-            self.__dict__.update(params)
-
-    @property
-    def dict(self):
-        """Gives dict-like access to Params instance by `params.dict['learning_rate']"""
-        return self.__dict__
-
-
-def get_and_preprocess_compas_data(params):
+def get_and_preprocess_compas_data():
     """Handle processing of COMPAS according to: https://github.com/propublica/compas-analysis
 
     Parameters
-    ----------
-    params : Params
 
     Returns
     ----------
     Pandas data frame X of processed data, np.ndarray y, and list of column names
     """
-    POSITIVE_OUTCOME = params.positive_outcome
-    NEGATIVE_OUTCOME = params.negative_outcome
+    POSITIVE_OUTCOME = 1
+    NEGATIVE_OUTCOME = 0
 
     compas_df = pd.read_csv("raw/compas-scores-2years.csv", index_col=0)
     compas_df = compas_df.loc[
@@ -100,9 +63,7 @@ def get_and_preprocess_compas_data(params):
 
 
 def main():
-    params = Params("raw/experiment_params_compas.json")
-    np.random.seed(params.seed)
-    df = get_and_preprocess_compas_data(params)
+    df = get_and_preprocess_compas_data()
 
     df.to_csv("compas.csv", index=False)
 
