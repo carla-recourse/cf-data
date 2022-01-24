@@ -1,4 +1,7 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
+
+TEST_SPLIT = 0.25
 
 
 def main():
@@ -12,7 +15,10 @@ def main():
 
     df = binary_map_categories(df)
 
+    df_train, df_test = train_test_split(df, test_size=TEST_SPLIT)
     df.to_csv("adult.csv", index=False)
+    df_train.to_csv("adult_train.csv", index=False)
+    df_test.to_csv("adult_test.csv", index=False)
 
 
 def binary_map_categories(df):
