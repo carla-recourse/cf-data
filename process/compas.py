@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
-
-TEST_SPLIT = 0.25
+from saving import save_to_file
 
 
 def get_and_preprocess_compas_data():
@@ -67,11 +65,8 @@ def get_and_preprocess_compas_data():
 
 def main():
     df = get_and_preprocess_compas_data()
-    df_train, df_test = train_test_split(df, test_size=TEST_SPLIT)
 
-    df.to_csv("compas.csv", index=False)
-    df_train.to_csv("compas_train.csv", index=False)
-    df_test.to_csv("compas_test.csv", index=False)
+    save_to_file(df, "compas")
 
 
 if __name__ == "__main__":
