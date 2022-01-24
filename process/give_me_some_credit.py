@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 from scipy import stats
+from sklearn.model_selection import train_test_split
+
+TEST_SPLIT = 0.25
 
 
 def main():
@@ -38,6 +41,11 @@ def main():
     train_df = train_df.iloc[idx]
     train_df = train_df[continuous_cols + target]
     train_df.to_csv("give_me_some_credit.csv", index=False)
+
+    # NOTE train_df is original train split, read above comments. df_train, df_test is our split of train_df!
+    df_train, df_test = train_test_split(train_df, test_size=TEST_SPLIT)
+    df_train.to_csv("give_me_some_credit_train.csv", index=False)
+    df_test.to_csv("give_me_some_credit_test.csv", index=False)
 
 
 if __name__ == "__main__":
